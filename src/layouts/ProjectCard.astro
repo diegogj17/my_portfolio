@@ -1,0 +1,22 @@
+---
+// Definimos las props que aceptará este componente
+const { title, description, technologies = [], link = "#", image } = Astro.props;
+---
+
+<article class="project-card">
+  {image && <div class="project-image">
+    <img src={image} alt={title} />
+  </div>}
+  <div class="project-content">
+    <h3>{title}</h3>
+    <p>{description}</p>
+    
+    {technologies.length > 0 && (
+      <div class="tech-stack">
+        {technologies.map((tech) => <span>{tech}</span>)}
+      </div>
+    )}
+    
+    <a href={link} class="btn">Ver detalles</a>
+  </div>
+</article>

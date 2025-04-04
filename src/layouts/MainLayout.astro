@@ -1,0 +1,81 @@
+---
+// Importamos los estilos globales
+import '../styles/global.css';
+
+const { title = 'Mi Portfolio' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Diego</h1>
+        <nav>
+          <a href="/">Inicio</a>
+          <a href="/projects">Proyectos</a>
+          <a href="/sobre-mi">Sobre mí</a>
+          <a href="/contact">Contacto</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <slot />
+    </main>
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Diego - Portfolio</p>
+      </div>
+    </footer>
+  </body>
+</html>
+<style>
+  /* Estos estilos solo afectan a este componente */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  header {
+    background-color: var(--color-background-alt);
+    color: var(--color-text-primary);
+    padding: 1rem 0;
+    box-shadow: var(--shadow-standard);
+  }
+  header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+  nav a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  nav a:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  main {
+    min-height: calc(100vh - 160px);
+    padding: 2rem 0;
+  }
+  footer {
+    background-color: var(--color-background-alt);
+    color: var(--color-text-secondary);
+    padding: 1rem 0;
+    text-align: center;
+    border-top: 1px solid var(--color-border);
+  }
+</style>

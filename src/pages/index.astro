@@ -1,11 +1,61 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import MainLayout from '../layouts/MainLayout.astro';
+import ProjectCard from '../layouts/ProjectCard.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Define project data
+const featuredProjects = [
+  {
+    title: "Proyecto 1",
+    description: "Descripción corta del proyecto 1.",
+    technologies: ["React", "Node.js"],
+    link: "/proyectos/proyecto-1"
+  },
+  {
+    title: "Proyecto 2",
+    description: "Descripción corta del proyecto 2.",
+    technologies: ["Vue", "Express"],
+    link: "/proyectos/proyecto-2"
+  },
+  {
+    title: "Proyecto 3",
+    description: "Descripción corta del proyecto 3.",
+    technologies: ["Astro", "Tailwind"],
+    link: "/proyectos/proyecto-3"
+  }
+];
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<MainLayout title="Inicio | Mi Portfolio">
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1>¡Hola, soy Diego!</h1>
+        <p class="lead">Desarrollador Backend</p>
+        <p class="hero-description">
+          Bienvenido a mi portfolio. Aquí encontrarás mis proyectos, habilidades y experiencias
+          como desarrollador.
+        </p>
+        <div class="hero-buttons">
+          <a href="/proyectos" class="btn">Ver mis proyectos</a>
+          <a href="/contact" class="btn">Contact Me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-projects">
+    <div class="container">
+      <h2>Proyectos destacados</h2>
+      <div class="projects-row">
+        {featuredProjects.map(project => (
+          <ProjectCard
+            title={project.title}
+            description={project.description}
+            technologies={project.technologies}
+            link={project.link}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</MainLayout>

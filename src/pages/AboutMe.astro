@@ -1,0 +1,212 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+
+// Puedes definir tus habilidades y experiencia aquí
+const skills = [
+  { name: "HTML/CSS", level: 90 },
+  { name: "JavaScript", level: 85 },
+  { name: "React", level: 80 },
+  { name: "Node.js", level: 75 },
+  { name: "Astro", level: 70 },
+  { name: "Git", level: 85 }
+];
+
+const experiences = [
+  {
+    title: "Desarrollador Frontend",
+    company: "Empresa A",
+    period: "2022 - Presente",
+    description: "Desarrollo de interfaces de usuario con React, implementación de APIs, etc."
+  },
+  {
+    title: "Desarrollador Web",
+    company: "Empresa B",
+    period: "2020 - 2022",
+    description: "Creación de sitios web responsivos, mantenimiento de aplicaciones existentes."
+  }
+];
+---
+
+<MainLayout title="Sobre Mí | Mi Portfolio">
+  <section class="about-section">
+    <h1>Sobre Mí</h1>
+    
+    <div class="about-content">
+      <div class="about-text">
+        <p class="lead">
+          ¡Hola! Soy Diego, un desarrollador apasionado por crear experiencias web increíbles.
+        </p>
+        
+        <p>
+          Me especializo en el desarrollo frontend con un enfoque en crear interfaces de usuario intuitivas
+          y atractivas. También tengo experiencia en desarrollo backend y me encanta aprender nuevas tecnologías.
+        </p>
+        
+        <p>
+          Cuando no estoy programando, disfruto de la fotografía, senderismo y leer libros de ciencia ficción.
+        </p>
+      </div>
+      
+      <div class="about-image">
+        <img src="/images/profile.jpg" alt="Diego" />
+      </div>
+    </div>
+    
+    <div class="skills-section">
+      <h2>Mis Habilidades</h2>
+      
+      <div class="skills-container">
+        {skills.map(skill => (
+          <div class="skill">
+            <div class="skill-info">
+              <span class="skill-name">{skill.name}</span>
+              <span class="skill-percentage">{skill.level}%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" style={`width: ${skill.level}%`}></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <div class="experience-section">
+      <h2>Experiencia</h2>
+      
+      <div class="timeline">
+        {experiences.map(exp => (
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>{exp.title}</h3>
+              <div class="timeline-meta">
+                <span>{exp.company}</span>
+                <span>{exp.period}</span>
+              </div>
+              <p>{exp.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style>
+  .about-section {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .about-content {
+    display: flex;
+    gap: 2rem;
+    margin: 2rem 0 3rem;
+  }
+
+  .about-text {
+    flex: 2;
+  }
+
+  .about-image {
+    flex: 1;
+  }
+
+  .about-image img {
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+
+  .skills-section, .experience-section {
+    margin-top: 3rem;
+  }
+
+  .skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .skill-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-bar {
+    height: 10px;
+    background-color: #e2e8f0;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .skill-progress {
+    height: 100%;
+    background-color: #3490dc;
+    border-radius: 5px;
+  }
+
+  .timeline {
+    position: relative;
+    margin-top: 2rem;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background-color: #e2e8f0;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -2.1rem;
+    top: 0.25rem;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #3490dc;
+    border: 3px solid white;
+  }
+
+  .timeline-meta {
+    display: flex;
+    justify-content: space-between;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .about-content {
+      flex-direction: column-reverse;
+    }
+
+    .about-image {
+      text-align: center;
+    }
+
+    .about-image img {
+      max-width: 300px;
+    }
+
+    .skills-container {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

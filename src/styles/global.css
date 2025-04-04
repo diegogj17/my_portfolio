@@ -1,0 +1,522 @@
+/* Estilos globales para toda la página web */
+
+:root {
+  /* Paleta de colores */
+  --color-background: #121212;
+  --color-background-alt: #1a1a1a;
+  --color-card: #1e1e1e;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #e0e0e0;
+  --color-text-muted: #b0b0b0;
+  --color-accent: #3498db;
+  --color-accent-hover: #2980b9;
+  --color-border: #333333;
+  --shadow-standard: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-secondary);
+  font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Tipografía */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+/* Contenedores comunes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.card {
+  background-color: var(--color-background-alt);
+  border-radius: 8px;
+  box-shadow: var(--shadow-standard);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Botones */
+.btn {
+  display: inline-block;
+  background-color: var(--color-accent);
+  color: #ffffff;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--color-accent-hover);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+/* Navegación */
+.nav-bar {
+  background-color: var(--color-background-alt);
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-items a {
+  color: var(--color-text-secondary);
+  margin: 0 1rem;
+  font-weight: 500;
+}
+
+.nav-items a:hover,
+.nav-items a.active {
+  color: var(--color-accent);
+}
+
+/* Secciones comunes */
+.section {
+  padding: 4rem 0;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--color-accent);
+}
+
+/* Formularios */
+input, textarea, select {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-secondary);
+}
+
+/* Footer */
+footer {
+  background-color: var(--color-background-alt);
+  padding: 2rem 0;
+  text-align: center;
+  margin-top: 3rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Utilidades */
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+.mb-5 { margin-bottom: 3rem; }
+
+/* Animaciones globales */
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Media queries generales */
+@media (max-width: 768px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.3rem; }
+  .section { padding: 2rem 0; }
+}
+
+/* =================================================================== */
+/* ESTILOS DE LA PÁGINA DE INICIO */
+/* =================================================================== */
+
+/* Estilos para la sección hero */
+.hero {
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.hero-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-content .lead {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #e6e6e6; /* Color casi blanco */
+}
+
+.hero-description {
+  margin-bottom: 1.5rem;
+  color: #d8d8d8; /* Color casi blanco */
+  line-height: 1.6;
+  max-width: 600px;
+  font-weight: 400; /* Añadir un poco más de peso a la fuente */
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+/* Estilos para la sección de proyectos destacados */
+.projects-row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.project-card {
+  flex: 1;
+  min-width: 300px;
+  max-width: 350px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.featured-projects h2 {
+  margin-bottom: 1.5rem;
+}
+
+/* Media queries para homepage */
+@media (max-width: 768px) {
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .hero-content {
+    max-width: 100%;
+  }
+  
+  .hero-buttons {
+    justify-content: center;
+  }
+  
+  .projects-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .project-card {
+    width: 100%;
+  }
+}
+
+/* =================================================================== */
+/* ESTILOS DE LA PÁGINA DE CONTACTO */
+/* =================================================================== */
+
+.contact-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: #e0e0e0;
+  background-color: #121212;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.2);
+}
+
+.contact-section:last-child {
+  border-bottom: none;
+}
+
+.contact-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+.lead {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #b0b0b0;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.contact-info {
+  width: 100%;
+  max-width: 600px;
+  background-color: #1a1a1a;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info h2 {
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.contact-details {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.contact-details li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  color: #e0e0e0;
+}
+
+.contact-details svg {
+  margin-right: 1rem;
+  min-width: 24px;
+  color: #3498db;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #1e1e1e;
+  color: #3498db;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background-color: #3498db;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+/* Media queries para contacto */
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+  }
+  
+  .contact-info {
+    margin-top: 2rem;
+    width: 100%;
+  }
+}
+
+/* Animaciones para contacto */
+.contact-info, .contact-details li, .social-links a {
+  transition: all 0.3s ease;
+}
+
+.contact-details li:hover {
+  transform: translateX(5px);
+}
+
+/* =================================================================== */
+/* ESTILOS DE LA PÁGINA SOBRE MÍ */
+/* =================================================================== */
+
+/* Aquí irán los estilos específicos para la página Sobre Mí */
+
+/* =================================================================== */
+/* ESTILOS DE LA PÁGINA DE SERVICIOS */
+/* =================================================================== */
+
+/* Aquí irán los estilos específicos para la página de Servicios */
+
+/* =================================================================== */
+/* ESTILOS DE LA PÁGINA DE PROYECTOS */
+/* =================================================================== */
+
+/* Aquí irán los estilos específicos para la página de Proyectos */
+
+/* =================================================================== */
+/* ESTILOS DE LA PÁGINA DE BLOG */
+/* =================================================================== */
+
+/* Aquí irán los estilos específicos para la página de Blog */
+
+/* ProjectCard Styles */
+.project-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.project-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.project-content {
+  padding: 1.5rem;
+  color: #333333; /* Dark text color for content */
+}
+
+.project-content h3 {
+  color: #000000; /* Black color for the title */
+  margin-bottom: 0.5rem;
+}
+
+.project-content p {
+  color: #555555; /* Medium-dark gray for descriptions */
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.tech-stack span {
+  background-color: #e2e8f0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: #2d3748; /* Dark color for tech stack text */
+}
+
+.btn {
+  display: inline-block;
+  background-color: #3490dc;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #2779bd;
+}
