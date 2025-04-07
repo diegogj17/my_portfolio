@@ -1,0 +1,44 @@
+---
+import Card from './Card.astro';
+import { fetchGitHubRepos, type GitHubRepo } from '../services/github';
+
+interface Props {
+    username: string;
+    limit?: number;
+}
+
+const { username, limit = 6 } = Astro.props;
+
+const repos = await fetchGitHubRepos(username);
+const limitedRepos = repos.slice(0, limit);
+---
+
+<div class="github-projects">
+    <h2>Mis proyectos de GitHub</h2>
+    <ul role="list" class="link-card-grid">
+        {limitedRepos.map((repo) => (
+            <Card
+                href={repo.html_url}
+                title={repo.name}
+                body={repo.description || 'Sin descripción disponible'}
+                tags={repo.topics}
+                stars={repo.stargazers_count}
+                language={repo.language}
+                isGitHubRepo={true}
+            />
+        ))}
+    </ul>
+</div>
+
+<style>
+    .github-projects {
+        margin: 2rem 0;
+    }
+    
+    .link-card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+        gap: 2rem;
+        padding: 0;
+    }
+</style>

@@ -1,22 +1,162 @@
 ---
-// Definimos las props que aceptará este componente
-const { title, description, technologies = [], link = "#", image } = Astro.props;
+interface Props {
+  title: string;
+  description: string;
+  technologies: string[];
+  link: string;
+  isGithub?: boolean;
+  stars?: number;
+  language?: string;
+  isFeatured?: boolean;
+}
+
+const { 
+  title, 
+  description, 
+  technologies = [], 
+  link, 
+  isGithub = false, 
+  stars, 
+  language, 
+  isFeatured = false 
+} = Astro.props;
 ---
 
-<article class="project-card">
-  {image && <div class="project-image">
-    <img src={image} alt={title} />
-  </div>}
-  <div class="project-content">
+<div class={`project-card ${isFeatured ? 'featured' : ''}`}>
+  <div class="card-header">
     <h3>{title}</h3>
-    <p>{description}</p>
-    
-    {technologies.length > 0 && (
-      <div class="tech-stack">
-        {technologies.map((tech) => <span>{tech}</span>)}
+    {isGithub && (
+      <div class="github-badge">
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+        {stars !== undefined && <span class="stars">★ {stars}</span>}
       </div>
     )}
-    
-    <a href={link} class="btn">Ver detalles</a>
   </div>
-</article>
+  <p>{description}</p>
+  <div class="tech-container">
+    {technologies && technologies.length > 0 ? (
+      technologies.map(tech => (
+        <span class="tech-badge">{tech}</span>
+      ))
+    ) : (
+      <span class="tech-badge">Sin tecnologías</span>
+    )}
+    {isGithub && language && <span class="tech-badge primary">{language}</span>}
+  </div>
+  <div class="card-footer">
+    <a href={link} target={isGithub ? "_blank" : "_self"} class="view-link">
+      {isGithub ? 'Ver en GitHub' : 'Ver detalle'}
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+      </svg>
+    </a>
+  </div>
+  
+  {isFeatured && (
+    <div class="featured-badge">Destacado</div>
+  )}
+</div>
+
+<style>
+  .project-card {
+    background-color: var(--card-bg, #ffffff);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    color: var(--text-color, #333);
+  }
+
+  p {
+    color: var(--text-secondary, #666);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .tech-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .tech-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    background-color: var(--badge-bg, #f0f0f0);
+    color: var(--badge-text, #666);
+  }
+
+  .tech-badge.primary {
+    background-color: var(--accent-color, #4a86e8);
+    color: white;
+  }
+
+  .card-footer {
+    margin-top: auto;
+  }
+
+  .view-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: var(--accent-color, #4a86e8);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .view-link:hover {
+    color: var(--accent-hover, #3a76d8);
+  }
+
+  .github-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #24292e;
+  }
+
+  .stars {
+    font-size: 0.85rem;
+    color: #f1c40f;
+  }
+
+  .featured {
+    border: 2px solid var(--accent-color, #4a86e8);
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background-color: var(--accent-color, #4a86e8);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+</style>

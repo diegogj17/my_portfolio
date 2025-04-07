@@ -96,13 +96,8 @@ a:hover {
 
 .btn-outline {
   background-color: transparent;
-  border: 1px solid var(--color-accent);
-  color: var(--color-accent);
-}
-
-.btn-outline:hover {
-  background-color: var(--color-accent);
-  color: #ffffff;
+  border: 1px solid var(--accent-color, #4a86e8);
+  color: var(--accent-color, #4a86e8);
 }
 
 /* Navegación */
@@ -261,30 +256,25 @@ footer {
 
 /* Estilos para la sección de proyectos destacados */
 .projects-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.view-more {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
-  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-.project-card {
-  flex: 1;
-  min-width: 300px;
-  max-width: 350px;
-  background: #ffffff;
-  border-radius: 10px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-}
-
-.featured-projects h2 {
-  margin-bottom: 1.5rem;
+.btn-github {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #24292e;
+  color: white;
 }
 
 /* Media queries para homepage */
@@ -408,7 +398,7 @@ footer {
   transition: all 0.3s ease;
 }
 
-.social-links a:hover {
+social-links a:hover {
   background-color: #3498db;
   color: #fff;
   transform: translateY(-3px);
