@@ -29,10 +29,9 @@ import MainLayout from '../layouts/MainLayout.astro';
       
       <div class="media-section">
         <div class="phone-mockup">
-          <img src="/images/movil.png" alt="Mockup del dispositivo móvil" />
           <div class="video-container">
             <video autoplay loop muted>
-              <source src="/videos/app-demo.mp4" type="video/mp4">
+              <source src="/videos/prueba-video.mp4" type="video/mp4">
               Tu navegador no soporta la etiqueta de video.
             </video>
           </div>
@@ -41,3 +40,61 @@ import MainLayout from '../layouts/MainLayout.astro';
     </div>
   </main>
 </MainLayout>
+
+<style>
+  .project-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .project-container {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+    
+    .project-description-section {
+      flex: 1;
+      max-width: 50%;
+    }
+    
+    .media-section {
+      flex: 1;
+      max-width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .phone-mockup {
+    position: relative;
+     width: 57.5%;  /* Increased from 50% to 57.5% (15% more) */
+    max-width: 287px;  /* Increased max-width by 15% as well */
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .video-container {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    background: transparent;
+  }
+</style>

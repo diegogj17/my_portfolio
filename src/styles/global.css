@@ -128,21 +128,27 @@ a:hover {
 /* Secciones comunes */
 .section {
   padding: 4rem 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  scroll-margin-top: 40px; /* Para la navegación suave */
 }
 
 .section-title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
   text-align: center;
-  margin-bottom: 3rem;
   position: relative;
 }
 
-.section-title::after {
+.section-title:after {
   content: '';
   position: absolute;
   bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
+  width: 100px;
   height: 3px;
   background-color: var(--color-accent);
 }
@@ -196,12 +202,38 @@ footer {
 
 /* Animaciones globales */
 .fade-in {
-  animation: fadeIn 0.5s ease;
+  animation: fadeIn 1s ease-in-out;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reveal .skill-progress {
+  width: 0 !important;
+  transition: width 1s ease-out 0.5s;
+}
+
+.scroll-reveal.visible .skill-progress {
+  width: var(--skill-level) !important;
 }
 
 /* Media queries generales */
@@ -318,12 +350,12 @@ footer {
   margin: 0 auto;
   padding: 2rem;
   color: #e0e0e0;
-  background-color: #121212;
+  background-color: transparent; /* Cambiado de #121212 a transparent */
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: none; /* Eliminada la sombra */
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(229, 231, 235, 0.2);
+  border-bottom: none; /* Eliminado el borde */
 }
 
 .contact-section:last-child {
@@ -348,88 +380,238 @@ footer {
   display: flex;
   justify-content: center;
   margin-top: 3rem;
+  background-color: transparent; /* Asegurando que sea transparente */
 }
 
-.contact-info {
-  width: 100%;
-  max-width: 600px;
-  background-color: #1a1a1a;
-  padding: 2rem;
+.contact-item {
+  text-align: center;
+  padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: transparent; /* Cambiado a transparente */
+  box-shadow: none; /* Eliminado la sombra */
+  border: 1px solid var(--color-border); /* Añadido un borde sutil para separar visualmente */
 }
 
-.contact-info h2 {
-  color: #ffffff;
-  margin-bottom: 1.5rem;
-  font-size: 1.8rem;
-  border-bottom: 2px solid #3498db;
-  padding-bottom: 0.5rem;
-  display: inline-block;
-}
-
-.contact-details {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 2rem;
-}
-
-.contact-details li {
+/* Estilos modernos para la sección de contacto */
+.contact-wrapper {
   display: flex;
-  align-items: center;
-  margin-bottom: 1.2rem;
-  color: #e0e0e0;
+  flex-direction: column;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
-.contact-details svg {
-  margin-right: 1rem;
-  min-width: 24px;
-  color: #3498db;
+@media (min-width: 768px) {
+  .contact-wrapper {
+    flex-direction: row;
+    height: 500px;
+  }
 }
 
-.social-links {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
+.contact-image {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  overflow: hidden;
 }
 
-.social-links a {
+@media (min-width: 768px) {
+  .contact-image {
+    width: 40%;
+    min-height: auto;
+  }
+}
+
+.animated-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(125deg, #6A5ACD, #9370DB, #7B68EE, #483D8B);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.animated-gradient::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+  opacity: 0.3;
+}
+
+.contact-info-container {
+  width: 100%;
+  padding: 2rem;
+  background: rgba(37, 37, 37, 0.2);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .contact-info-container {
+    width: 60%;
+  }
+}
+
+.contact-item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  background: transparent;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.contact-item:hover {
+  transform: translateX(10px);
+}
+
+.contact-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(147, 112, 219, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-icon svg {
+  color: var(--color-accent);
+}
+
+.contact-text {
+  flex: 1;
+}
+
+.contact-text h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--color-text-primary);
+  font-size: 1.25rem;
+}
+
+.contact-text p,
+.contact-text a {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-button {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #252525;
-  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-primary);
   transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-social-links a:hover {
-  background-color: var(--color-accent);
-  color: #fff;
+.social-button:hover {
   transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Media queries para contacto */
+.social-button.linkedin:hover {
+  background-color: #333; /* Cambiado de #0077B5 a #333 para que coincida con GitHub */
+  border-color: #333;
+}
+
+.social-button.github:hover {
+  background-color: #333;
+  border-color: #333;
+}
+
+.social-button.twitter:hover {
+  background-color: #1DA1F2;
+  border-color: #1DA1F2;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Estilos simplificados para la sección de contacto */
+.contact-wrapper-simple {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(37, 37, 37, 0.1);
+  backdrop-filter: blur(5px);
+  border-radius: 16px;
+  transition: transform 0.3s ease;
+}
+
+.contact-wrapper-simple:hover {
+  transform: translateY(-5px);
+}
+
+.contact-info-container-simple {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 @media (max-width: 768px) {
-  .contact-container {
+  .contact-info-container-simple {
+    gap: 1.5rem;
+  }
+}
+
+/* Estilos para la disposición horizontal de contacto */
+.contact-info-container-horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 2rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .contact-info-container-horizontal {
     flex-direction: column;
+    gap: 1.5rem;
   }
-  
-  .contact-info {
-    margin-top: 2rem;
-    width: 100%;
-  }
-}
-
-/* Animaciones para contacto */
-.contact-info, .contact-details li, .social-links a {
-  transition: all 0.3s ease;
-}
-
-.contact-details li:hover {
-  transform: translateX(5px);
 }
 
 /* =================================================================== */
@@ -564,7 +746,87 @@ social-links a:hover {
 /* ESTILOS DE LA PÁGINA DE PROYECTOS */
 /* =================================================================== */
 
-/* Aquí irán los estilos específicos para la página de Proyectos */
+/* Project page styles */
+.project-container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.project-description-section {
+  flex: 1;
+  padding: 1rem;
+}
+
+.media-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone-mockup {
+  position: relative;
+  width: 250px;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-container {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  background: transparent;
+}
+
+.phone-mockup img {
+  width: 100%;
+  height: auto;
+}
+
+.tech-stack {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.tech-stack h2 {
+  margin-bottom: 1rem;
+}
+
+.tech-list {
+  width: 100%;
+}
+
+.tech-list ul {
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+  list-style-position: inside;
+}
+
+.tech-list li {
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .project-container {
+    flex-direction: column;
+  }
+}
 
 /* =================================================================== */
 /* ESTILOS DE LA PÁGINA DE BLOG */
@@ -1044,22 +1306,6 @@ h1 {
 .phone-mockup img {
   width: 100%;
   height: auto;
-}
-
-.video-container {
-  position: absolute;
-  top: 10%;
-  left: 7%;
-  width: 86%;
-  height: 76%;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.video-container video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .tech-stack {
